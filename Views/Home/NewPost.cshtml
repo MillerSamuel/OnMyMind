@@ -1,0 +1,24 @@
+@{
+    ViewData["Title"] = "New Post";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+@model Post
+<partial name="_Header"></partial>
+<body>
+    <form action="/CreatePost" method="post">
+        <h2>Whats on Your Mind?</h2>
+        <div class="form-group">
+            <textarea cols="50" rows="4" asp-for="PostText"></textarea>
+        </div>
+        <input type="submit" value="Create Post">
+        <input asp-for="UserId" hidden value="@ViewBag.loggedUser.UserId">
+    </form>
+</body>
+</html>

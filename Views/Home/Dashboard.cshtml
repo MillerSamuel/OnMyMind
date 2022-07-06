@@ -1,0 +1,28 @@
+@{
+    ViewData["Title"] = "Dashboard";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+<partial name="_Header"></partial>
+<body>
+    <h1>DASHBOARD</h1>
+    <div class="feed">Feed Here</div>
+    <div>
+        <h2>Follow Suggestions</h2>
+        @foreach (User u in ViewBag.allUsers)
+        {
+            if(u.UserId!=Context.Session.GetInt32("user"))
+            {
+            <p><a href="/Profile/@u.UserId"> @u.FirstName</a> <a href="/Follow/@u.UserId">Follow</a></p>
+            }
+        }
+    </div>
+</body>
+</html>
