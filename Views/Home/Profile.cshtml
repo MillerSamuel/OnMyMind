@@ -1,8 +1,10 @@
-
 @{
     ViewData["Title"] = "Profile";
-}<!DOCTYPE html>
+    bool alreadyLiked=false;
+}
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,27 +22,53 @@
             <img class="pfp" src="~/images/ProfilePic.jpg" alt="profile Pic">
             <p>Bio: @ViewBag.User.Bio</p>
             <p>Location: @ViewBag.User.Location </p>
-            @if(ViewBag.User.UserId==Context.Session.GetInt32("user"))
+            @if (ViewBag.User.UserId == Context.Session.GetInt32("user"))
             {
                 <p><a href="/EditProfile">Edit Profile</a></p>
             }
         </div>
         <div class="col-6">
-            @if(ViewBag.User.UserId==Context.Session.GetInt32("user"))
+            @if (ViewBag.User.UserId == Context.Session.GetInt32("user"))
             {
                 <h3><a href="/NewPost">Create a post</a> </h3>
                 <h1>Your Posts Here</h1>
+                @foreach (Post p in ViewBag.User.CreatedPosts)
+                {
+                    <h3>@p.PostText</h3>
+                    <p>Made on: @p.CreatedAt</p>
+                }
             }
-            else{
-                <h1>@ViewBag.User.FirstName's Posts </h1>
-            }
-            @foreach (Post p in ViewBag.User.CreatedPosts)
+            else
             {
-                <h3>@p.PostText</h3>
-                <p>Made on: @p.CreatedAt</p>
+                <h2><a href="/Follow/@ViewBag.User.UserId">Follow @ViewBag.User.FirstName</a></h2>
+                <h1>@ViewBag.User.FirstName's Posts </h1>
+                @foreach (Post p in ViewBag.User.CreatedPosts)
+                {
+                    <h3>@p.PostText</h3>
+                    <p>Made on: @p.CreatedAt</p>
+                    @foreach (Like l in ViewBag.loggedUser.Likes)
+                    {
+                        if(l.PostId==p.PostId)
+                        {
+                            {alreadyLiked=true;}
+                        }
+                    }
+                    if(!alreadyLiked)
+                    {
+                        <a href="/Like/@p.PostId">Like</a>
+                    }
+                    else
+                    {
+                        <a href="/Unlike/@p.PostId">Un-Like</a>
+                    }
+                    {alreadyLiked=false;}
+                }
             }
         </div>
         <div><a href="/FollowingList/@ViewBag.User.UserId"> Following</a></div>
+        <a href="/FollowersList/@ViewBag.User.UserId">Followers</a>
+        <a href="/LikesList/@ViewBag.User.UserId">Likes</a>
     </div>
 </body>
+
 </html>

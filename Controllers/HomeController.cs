@@ -83,7 +83,8 @@ public class HomeController : Controller
         {
             return RedirectToAction("Index");
         }
-            ViewBag.allUsers=_context.Users.Take(4);
+            ViewBag.allUsers=_context.Users.Include(a=>a.Followers).ThenInclude(a=>a.Follower).Take(5);
+            ViewBag.User=_context.Users.Include(a=>a.Following).ThenInclude(a=>a.UserFollowed.CreatedPosts).Include(a=>a.Likes).ThenInclude(a=>a.Post).FirstOrDefault(a=>a.UserId==HttpContext.Session.GetInt32("user"));
             return View();
     }
 
@@ -107,6 +108,7 @@ public class HomeController : Controller
             return RedirectToAction("Index");
         }
         ViewBag.User=_context.Users.Include(a=>a.CreatedPosts).FirstOrDefault(a=>a.UserId==userId);
+        ViewBag.loggedUser=_context.Users.Include(a=>a.Likes).ThenInclude(a=>a.Post).FirstOrDefault(a=>a.UserId==HttpContext.Session.GetInt32("user"));
         return View("Profile");
     }
 
@@ -175,14 +177,56 @@ public class HomeController : Controller
         return View("FollowingList");
     }
 
+    [HttpGet("FollowersList/{UserId}")]
+    public IActionResult FollowersList(int UserId)
+    {
+        ViewBag.User=_context.Users.Include(a=>a.Followers).ThenInclude(a=>a.Follower).FirstOrDefault(a=>a.UserId==UserId);
+        return View("FollowersList");
+    }
+
+
+    [HttpGet("Like/{PostId}")]
+    public IActionResult AddLike(int PostId)
+    {
+        Like newLike=new Like();
+        newLike.PostId=PostId;
+        newLike.UserId=(int)HttpContext.Session.GetInt32("user");
+        _context.Add(newLike);
+        _context.SaveChanges();
+        return RedirectToAction("dashboard");
+    }
+
+    [HttpGet("Unlike/{Postid}")]
+    public IActionResult Unlike(int PostId)
+    {
+        Like like=_context.Likes.FirstOrDefault(a=>a.PostId==PostId);
+        _context.Remove(like);
+        _context.SaveChanges();
+        return RedirectToAction("dashboard");
+    }
+
+    // [HttpGet("Like2/{PostId}/{ProfId}")]
+    // public IActionResult AddLike2(int PostId, int ProfId)
+    // {
+    //     Like newLike=new Like();
+    //     newLike.PostId=PostId;
+    //     newLike.UserId=(int)HttpContext.Session.GetInt32("user");
+    //     _context.Add(newLike);
+    //     _context.SaveChanges();
+    //     return RedirectToAction("Profile");
+    // }
 
 
 
+    [HttpGet("LikesList/{UserId}")]
+    public IActionResult LikesList(int UserId)
+    {
+        ViewBag.User=_context.Users.Include(a=>a.Likes).ThenInclude(a=>a.Post).FirstOrDefault(a=>a.UserId==UserId);
+        return View("LikesList");
+    }
 
 
-
-
-
+[HttpGet("Search")]
 
 
 

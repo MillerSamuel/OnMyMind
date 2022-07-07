@@ -1,5 +1,7 @@
 @{
     ViewData["Title"] = "Dashboard";
+    bool alreadyFollowing=false;
+    bool alreadyLiked=false;
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -13,15 +15,51 @@
 <partial name="_Header"></partial>
 <body>
     <h1>DASHBOARD</h1>
-    <div class="feed">Feed Here</div>
+    <div class="feed">
+        <p>Feed here</p>
+        @foreach (Connection c in ViewBag.User.Following)
+        {
+            @foreach (Post p in c.UserFollowed.CreatedPosts)
+            {
+                @foreach (Like l in ViewBag.User.Likes)
+                {
+                    if(l.PostId==p.PostId)
+                    {
+                        alreadyLiked=true;
+                    }
+                }
+                if(alreadyLiked)
+                {
+                <p><a href="/Profile/@c.UserFollowed.UserId"> @c.UserFollowed.FirstName's</a> Post--- @p.PostText <a href="/Unlike/@p.PostId">Un-Like</a></p>
+                }
+                else
+                {
+                <p><a href="/Profile/@c.UserFollowed.UserId"> @c.UserFollowed.FirstName's</a> Post--- @p.PostText  <a href="/Like/@p.PostId">Like</a></p>
+                }
+                {alreadyLiked=false;}
+            }
+        }
+    </div>
+    
     <div>
         <h2>Follow Suggestions</h2>
         @foreach (User u in ViewBag.allUsers)
         {
             if(u.UserId!=Context.Session.GetInt32("user"))
             {
+                @foreach (Connection c2 in ViewBag.User.Following)
+                {
+                    if(c2.UserFollowed.FirstName==u.FirstName)
+                    {
+                        {alreadyFollowing=true;}
+                    }
+                }
+            if(alreadyFollowing==false)
+            {
             <p><a href="/Profile/@u.UserId"> @u.FirstName</a> <a href="/Follow/@u.UserId">Follow</a></p>
             }
+            }
+            {alreadyFollowing=false;}
         }
     </div>
 </body>
