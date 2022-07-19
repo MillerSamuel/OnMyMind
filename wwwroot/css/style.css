@@ -1,10 +1,124 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #d1d1d4;
+}
 
+
+.white{
+    background-color: white;
+}
+
+.green{
+    color: #42b72a;
+}
+
+.white{
+    background-color: white;
+}
+
+.white2 * {
+    background-color: white;
+
+}
+
+/* Login Page */
+
+.brand{
+    font-size: 65px;
+    margin-bottom: 30px;
+}
+
+.login-box{
+    width: 28%;
+    margin:auto;
+    box-shadow: 0 0 2px 2px black;
+}
+
+.login-box *{
+    background-color: white;
+}
+
+.btn{
+    background-color: lightskyblue;
+    padding-top: 5px;
+    margin-top: -5px;
+    
+}
+
+
+/* Dashboard */
+
+
+.head{
+    background-color:#ffff
+}
+
+.searchbox{
+    width: 15%;
+    height: 35px;
+    margin-top: 5px;
+}
+
+.srchbtn:hover{
+    transform: scale(1.05);
+    transition:ease-in 75ms;
+}
 .feed{
-    background-color: green;
     width: 50%;
     text-align: center;
+    margin: 0 auto;
 }
+
+.post{
+    border: 1px solid rgba(0, 0, 0, 0.842);
+    box-shadow: 0 0 2px 1px black;
+    margin-bottom: 50px;
+}
+
+.name{
+    text-decoration: unset;
+    color: unset;
+}
+
+.postimg{
+    width: 50px;
+    border-radius: 50%;
+    margin: 10px;
+}
+
+
+/* Profiile Page */
 
 .pfp{
     border-radius: 50%;
+    height: 170px;
+    margin-left: 30px;
+}
+
+.profile-text{
+    font-size: 14pt;
+    margin: 5px;
+}
+
+.follow-text{
+    text-decoration: unset;
+    color: unset;
+    font-size: 13pt;
+    background-color: white;
+    margin: 5px;
+}
+
+.follow-text:hover{
+    text-decoration: underline;
+    color: unset;
+}
+
+
+/* new post */
+.post-box{
+    width: 50%;
+    margin:10px auto;
+    box-shadow: 0 0 2px 2px black;
 }

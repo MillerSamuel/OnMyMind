@@ -2,20 +2,29 @@
     ViewData["Title"] = "Login";
 }
 @model LogUser
+<link rel="stylesheet" href="~/css/style.css">
+
 <div class="text-center">
-    <h1 class="display-4">Login</h1>
-    <form action="/login" method="post">
-        <div class="form-group">
-            <label for="LogEmail">Email:</label>
-            <input class="form-control" asp-for="LogEmail">
-            <span class="text-danger"  asp-validation-for="LogEmail"></span>
+    <div>
+        <h1 class="brand">OnMyMind</h1>
+    </div>
+    <div class="login-box">
+        <h1 style="margin: 0px;">Login</h1>
+        <div class="container">
+            <form style="padding:10px;" action="/login" method="post">
+                <div class="form-group">
+                    <label for="LogEmail">Email:</label>
+                    <input class="form-control" asp-for="LogEmail">
+                    <span class="text-danger" asp-validation-for="LogEmail"></span>
+                </div>
+                <div class="form-group">
+                    <label for="LogPassword">Password:</label>
+                    <input class="form-control" asp-for="LogPassword">
+                    <span class="text-danger" asp-validation-for="LogPassword"></span>
+                </div>
+                <input class="m-2 btn" type="submit" value="Login">
+            </form>
         </div>
-        <div class="form-group">
-            <label for="LogPassword">Password:</label>
-            <input class="form-control" asp-for="LogPassword">
-            <span class="text-danger"  asp-validation-for="LogPassword"></span>
-        </div>
-        <input class="m-2" type="submit" value="Login">
-    </form>
-    <p>Dont Have an Account? Register <a href="Register">Here</a></p>
+        <p style="margin: 0;">Dont Have an Account? Register <a href="Register">Here</a></p>
+    </div>
 </div>

@@ -47,7 +47,7 @@ public class User
 
     [InverseProperty("UserFollowed")]
     public List<Connection> Followers {get;set;}=new List<Connection>();
-
+ 
     public List<Post> CreatedPosts {get;set;} =new List<Post>();
 
     public List<Like> Likes {get;set;}=new List<Like>();

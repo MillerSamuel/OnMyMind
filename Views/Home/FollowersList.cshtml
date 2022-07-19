@@ -6,11 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<partial name="_Header.cshtml"></partial>
 <body>
-    <h1>This is @ViewBag.User.FirstName's Followers list</h1>
-    @foreach (Connection c in ViewBag.User.Followers)
-    {
-        <p><a href="/Profile/@c.Follower.UserId">@c.Follower.FirstName @c.Follower.LastName</a> </p>
-    }
+    <div class="container">
+        <h1>@ViewBag.User.FirstName's Followers</h1>
+        @foreach (Connection c in ViewBag.User.Followers)
+        {
+            <div class="d-flex align-items-center post white white2" style="width: 350px;">
+                <img class="postimg" src="/images/ProfilePic.jpg" alt="">
+                <p><a class="follow-text" href="/Profile/@c.Follower.UserId">@c.Follower.FirstName @c.Follower.LastName</a> </p>
+            </div>
+        }
+    </div>
 </body>
 </html>

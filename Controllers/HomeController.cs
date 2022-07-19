@@ -83,22 +83,22 @@ public class HomeController : Controller
         {
             return RedirectToAction("Index");
         }
-            ViewBag.allUsers=_context.Users.Include(a=>a.Followers).ThenInclude(a=>a.Follower).Take(5);
-            ViewBag.User=_context.Users.Include(a=>a.Following).ThenInclude(a=>a.UserFollowed.CreatedPosts).Include(a=>a.Likes).ThenInclude(a=>a.Post).FirstOrDefault(a=>a.UserId==HttpContext.Session.GetInt32("user"));
+            ViewBag.allUsers=_context.Users.Include(a=>a.Followers).ThenInclude(a=>a.Follower).ToList();
+            ViewBag.LoggedUser=_context.Users.Include(a=>a.Following).ThenInclude(a=>a.UserFollowed.CreatedPosts).Include(a=>a.Likes).ThenInclude(a=>a.Post).FirstOrDefault(a=>a.UserId==HttpContext.Session.GetInt32("user"));
             return View();
     }
 
 
-    [HttpGet("Profile")]
-    public IActionResult Profile()
-    {
-        if(HttpContext.Session.GetInt32("user")==null)
-        {
-            return RedirectToAction("Index");
-        }
-        ViewBag.User=_context.Users.Include(a=>a.CreatedPosts).FirstOrDefault(a=>a.UserId==HttpContext.Session.GetInt32("user"));
-        return View();
-    }
+    // [HttpGet("Profile")]
+    // public IActionResult Profile()
+    // {
+    //     if(HttpContext.Session.GetInt32("user")==null)
+    //     {
+    //         return RedirectToAction("Index");
+    //     }
+    //     ViewBag.User=_context.Users.Include(a=>a.CreatedPosts).FirstOrDefault(a=>a.UserId==HttpContext.Session.GetInt32("user"));
+    //     return View();
+    // }
 
     [HttpGet("Profile/{userId}")]
     public IActionResult Profile2(int userId)
@@ -107,8 +107,8 @@ public class HomeController : Controller
         {
             return RedirectToAction("Index");
         }
-        ViewBag.User=_context.Users.Include(a=>a.CreatedPosts).FirstOrDefault(a=>a.UserId==userId);
-        ViewBag.loggedUser=_context.Users.Include(a=>a.Likes).ThenInclude(a=>a.Post).FirstOrDefault(a=>a.UserId==HttpContext.Session.GetInt32("user"));
+        ViewBag.User=_context.Users.Include(a=>a.CreatedPosts).Include(a=>a.Followers).ThenInclude(a=>a.Follower).Include(a=>a.Following).ThenInclude(a=>a.UserFollowed).FirstOrDefault(a=>a.UserId==userId);
+        ViewBag.LoggedUser=_context.Users.Include(a=>a.Likes).ThenInclude(a=>a.Post).Include(a=>a.Following).ThenInclude(a=>a.UserFollowed).FirstOrDefault(a=>a.UserId==HttpContext.Session.GetInt32("user"));
         return View("Profile");
     }
 
@@ -119,8 +119,9 @@ public class HomeController : Controller
         {
             return RedirectToAction("Index");
         }
-        User loggedUser=_context.Users.FirstOrDefault(a=>a.UserId==HttpContext.Session.GetInt32("user"));
-        return View(loggedUser);
+        User LoggedUser=_context.Users.FirstOrDefault(a=>a.UserId==HttpContext.Session.GetInt32("user"));
+        ViewBag.LoggedUser=_context.Users.FirstOrDefault(a=>a.UserId==HttpContext.Session.GetInt32("user"));
+        return View(LoggedUser);
     }
 
     [HttpPost("SaveEdit")]
@@ -131,7 +132,7 @@ public class HomeController : Controller
         oldUser.Location=editUser.Location;
         oldUser.UpdatedAt=DateTime.Now;
         _context.SaveChanges();
-        return RedirectToAction("Profile");
+        return RedirectToAction("Dashboard");
     }
 
     [HttpGet("NewPost")]
@@ -141,7 +142,7 @@ public class HomeController : Controller
         {
             return RedirectToAction("Index");
         }
-        ViewBag.loggedUser=_context.Users.FirstOrDefault(a=>a.UserId==HttpContext.Session.GetInt32("user"));
+        ViewBag.LoggedUser=_context.Users.FirstOrDefault(a=>a.UserId==HttpContext.Session.GetInt32("user"));
         return View();
     }
 
@@ -173,6 +174,7 @@ public class HomeController : Controller
     [HttpGet("FollowingList/{UserId}")]
     public IActionResult FollowingList(int UserId)
     {
+        ViewBag.loggedUser=_context.Users.FirstOrDefault(a=>a.UserId==HttpContext.Session.GetInt32("user"));
         ViewBag.User=_context.Users.Include(a=>a.Following).ThenInclude(a=>a.UserFollowed).FirstOrDefault(a=>a.UserId==UserId);
         return View("FollowingList");
     }
@@ -180,6 +182,7 @@ public class HomeController : Controller
     [HttpGet("FollowersList/{UserId}")]
     public IActionResult FollowersList(int UserId)
     {
+        ViewBag.loggedUser=_context.Users.FirstOrDefault(a=>a.UserId==HttpContext.Session.GetInt32("user"));
         ViewBag.User=_context.Users.Include(a=>a.Followers).ThenInclude(a=>a.Follower).FirstOrDefault(a=>a.UserId==UserId);
         return View("FollowersList");
     }
@@ -226,8 +229,13 @@ public class HomeController : Controller
     }
 
 
-[HttpGet("Search")]
-
+    [HttpPost("Search")]
+    public IActionResult SearchResults(string Search)
+    {
+        ViewBag.Search=Search;
+        ViewBag.SearchResults=_context.Users.Where(a=>a.FirstName==Search);
+        return View("SearchResults");
+    }
 
 
 

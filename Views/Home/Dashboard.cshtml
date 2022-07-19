@@ -14,53 +14,71 @@
 </head>
 <partial name="_Header"></partial>
 <body>
-    <h1>DASHBOARD</h1>
-    <div class="feed">
-        <p>Feed here</p>
-        @foreach (Connection c in ViewBag.User.Following)
-        {
-            @foreach (Post p in c.UserFollowed.CreatedPosts)
+    <div class="text-center container">
+        <form action="/Search" method="post" class="m-1">
+            <input type="text" name="Search" placeholder="Find Users" class="searchbox">
+            <input type="submit" value="Search" class="btn srchbtn" >
+        </form>
+        <div class="feed">
+            @foreach (Connection c in ViewBag.LoggedUser.Following)
             {
-                @foreach (Like l in ViewBag.User.Likes)
+                @foreach (Post p in c.UserFollowed.CreatedPosts)
                 {
-                    if(l.PostId==p.PostId)
+                    @foreach (Like l in ViewBag.LoggedUser.Likes)
                     {
-                        alreadyLiked=true;
+                        if(l.PostId==p.PostId)
+                        {
+                            alreadyLiked=true;
+                        }
                     }
-                }
-                if(alreadyLiked)
-                {
-                <p><a href="/Profile/@c.UserFollowed.UserId"> @c.UserFollowed.FirstName's</a> Post--- @p.PostText <a href="/Unlike/@p.PostId">Un-Like</a></p>
-                }
-                else
-                {
-                <p><a href="/Profile/@c.UserFollowed.UserId"> @c.UserFollowed.FirstName's</a> Post--- @p.PostText  <a href="/Like/@p.PostId">Like</a></p>
-                }
-                {alreadyLiked=false;}
-            }
-        }
-    </div>
-    
-    <div>
-        <h2>Follow Suggestions</h2>
-        @foreach (User u in ViewBag.allUsers)
-        {
-            if(u.UserId!=Context.Session.GetInt32("user"))
-            {
-                @foreach (Connection c2 in ViewBag.User.Following)
-                {
-                    if(c2.UserFollowed.FirstName==u.FirstName)
+                    if(alreadyLiked)
                     {
-                        {alreadyFollowing=true;}
+                    <div class="post white">
+                        <div class="d-flex  align-items-center white">
+                            <img class="postimg" src="~/images/ProfilePic.jpg" alt="">
+                            <p class="white"><a class="name white" href="/Profile/@c.UserFollowed.UserId"> @c.UserFollowed.FirstName @c.UserFollowed.LastName</a></p>
+                        </div>
+                        <p class="white">@p.PostText </p>
+                        <p class="white">@p.CreatedAt.ToShortDateString() @p.CreatedAt.ToShortTimeString() <a class="white" href="/Unlike/@p.PostId">Un-Like</a></p>
+                    </div>
                     }
+                    else
+                    {
+                    <div class="post white">
+                        <div class="d-flex align-items-center white">
+                            <img class="postimg" src="~/images/ProfilePic.jpg" alt="">
+                            <p class="white"><a class="name white" href="/Profile/@c.UserFollowed.UserId"> @c.UserFollowed.FirstName @c.UserFollowed.LastName</a> </p>
+                        </div>
+                        <p class="white">@p.PostText</p>  
+                        <p class="white">@p.CreatedAt.ToShortDateString() @p.CreatedAt.ToShortTimeString()  <a class="white" href="/Like/@p.PostId">Like</a></p>
+                    </div>
+                    }
+                    {alreadyLiked=false;}
                 }
-            if(alreadyFollowing==false)
+            }
+        </div>
+        
+        <div>
+            <h2>Follow Suggestions</h2>
+            @foreach (User u in ViewBag.allUsers)
             {
-            <p><a href="/Profile/@u.UserId"> @u.FirstName</a> <a href="/Follow/@u.UserId">Follow</a></p>
+                if(u.UserId!=Context.Session.GetInt32("user"))
+                {
+                    @foreach (Connection c2 in ViewBag.LoggedUser.Following)
+                    {
+                        if(c2.UserFollowed.FirstName==u.FirstName)
+                        {
+                            {alreadyFollowing=true;}
+                        }
+                    }
+                if(alreadyFollowing==false)
+                {
+                <p><a href="/Profile/@u.UserId"> @u.FirstName</a> <a href="/Follow/@u.UserId">Follow</a></p>
+                }
+                }
+                {alreadyFollowing=false;}
             }
-            }
-            {alreadyFollowing=false;}
-        }
+        </div>
     </div>
 </body>
 </html>
