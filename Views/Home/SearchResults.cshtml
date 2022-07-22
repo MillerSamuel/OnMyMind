@@ -1,24 +1,35 @@
 @{
-    bool noUsers=true;
+    bool noUsers = true;
 }
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<partial name="_Header"></partial>
+
 <body>
-    <h1>Search Results</h1>
-    @foreach (User u in ViewBag.SearchResults)
-    {
-        <a href="Profile/@u.UserId">@u.FirstName</a>
-        noUsers=false;
-    }
-    @if(noUsers==true)
-    {
-        <p>Sorry, No results for @ViewBag.Search</p>
-    }
+    <div class="container text-center">
+        <h1>Search Results</h1>
+        @foreach (User u in ViewBag.SearchResults)
+        {
+            <div class="post white white2 container text-center" style="width: 25%;">
+                <div class="d-flex align-items-center justify-content-center white">
+                    <img class="postimg" src="~/images/ProfilePic.jpg" alt="">
+                    <a class="follow-text" href="Profile/@u.UserId">@u.FirstName @u.LastName</a>
+                </div>
+            </div>
+            noUsers = false;
+        }
+        @if (noUsers == true)
+        {
+            <p>Sorry, No results for @ViewBag.Search</p>
+        }
+    </div>
 </body>
+
 </html>

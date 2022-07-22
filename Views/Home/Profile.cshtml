@@ -50,6 +50,7 @@
                     <div class="post white">
                         <h3 class="white">@p.PostText</h3>
                         <p class="white">Made on: @p.CreatedAt</p>
+                        <p class="white">@p.Likes.Count() Likes</p>
                     </div>
                 }
             }
@@ -73,6 +74,7 @@
                     <div class="post white">
                         <h3 class="white">@p.PostText</h3>
                         <p class="white">Made on: @p.CreatedAt</p>
+                        <p class="white">@p.Likes.Count() Likes</p>
                     @foreach (Like l in ViewBag.loggedUser.Likes)
                     {
                         if (l.PostId == p.PostId)

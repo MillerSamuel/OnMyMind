@@ -5,12 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="~/css/style.css">
+
 </head>
+<partial name="_Header"></partial>
 <body>
-    <h1>This is @ViewBag.User.FirstName's Likes list</h1>
+    <h1 class="text-center">@ViewBag.User.FirstName's Likes</h1>
     @foreach (Like l in ViewBag.User.Likes)
     {
-        <p>@l.Post.PostText</p>
+        <div class="post white white2 container text-center" style="width: 40%;">
+            <div class="d-flex align-items-center white">
+                <img class="postimg" src="~/images/ProfilePic.jpg" alt="">
+                <h4><a style="text-decoration: unset; color:unset;" href="/Profile/@l.Post.User.UserId">@l.Post.User.FirstName @l.Post.User.LastName</a></h4>
+            </div>
+            <p >@l.Post.PostText</p>
+            <p >@l.Post.CreatedAt.ToShortDateString() @l.Post.CreatedAt.ToShortTimeString()</p>
+            <p class="white">@l.Post.Likes.Count() Likes</p>
+        </div>
     }
 </body>
 </html>

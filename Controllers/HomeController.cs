@@ -84,7 +84,13 @@ public class HomeController : Controller
             return RedirectToAction("Index");
         }
             ViewBag.allUsers=_context.Users.Include(a=>a.Followers).ThenInclude(a=>a.Follower).ToList();
-            ViewBag.LoggedUser=_context.Users.Include(a=>a.Following).ThenInclude(a=>a.UserFollowed.CreatedPosts).Include(a=>a.Likes).ThenInclude(a=>a.Post).FirstOrDefault(a=>a.UserId==HttpContext.Session.GetInt32("user"));
+            ViewBag.LoggedUser=_context.Users.Include(a=>a.Following)
+            .ThenInclude(a=>a.UserFollowed)
+            .ThenInclude(followed=>followed.CreatedPosts)
+            .ThenInclude(post=>post.Likes)
+            .Include(a=>a.Likes).ThenInclude(a=>a.Post)
+            .FirstOrDefault(a=>a.UserId==HttpContext.Session.GetInt32("user"));
+            // ViewBag.AllPosts=_context.Posts.Include(post=>Likes).ToList();
             return View();
     }
 
@@ -107,7 +113,7 @@ public class HomeController : Controller
         {
             return RedirectToAction("Index");
         }
-        ViewBag.User=_context.Users.Include(a=>a.CreatedPosts).Include(a=>a.Followers).ThenInclude(a=>a.Follower).Include(a=>a.Following).ThenInclude(a=>a.UserFollowed).FirstOrDefault(a=>a.UserId==userId);
+        ViewBag.User=_context.Users.Include(a=>a.CreatedPosts).ThenInclude(post=>post.Likes).Include(a=>a.Followers).ThenInclude(a=>a.Follower).Include(a=>a.Following).ThenInclude(a=>a.UserFollowed).FirstOrDefault(a=>a.UserId==userId);
         ViewBag.LoggedUser=_context.Users.Include(a=>a.Likes).ThenInclude(a=>a.Post).Include(a=>a.Following).ThenInclude(a=>a.UserFollowed).FirstOrDefault(a=>a.UserId==HttpContext.Session.GetInt32("user"));
         return View("Profile");
     }
@@ -224,7 +230,8 @@ public class HomeController : Controller
     [HttpGet("LikesList/{UserId}")]
     public IActionResult LikesList(int UserId)
     {
-        ViewBag.User=_context.Users.Include(a=>a.Likes).ThenInclude(a=>a.Post).FirstOrDefault(a=>a.UserId==UserId);
+        ViewBag.LoggedUser=_context.Users.FirstOrDefault(a=>a.UserId==HttpContext.Session.GetInt32("user"));
+        ViewBag.User=_context.Users.Include(a=>a.Likes).ThenInclude(a=>a.Post).ThenInclude(a=>a.User).Include(user=>user.Likes).ThenInclude(likes=>likes.Post.Likes).FirstOrDefault(a=>a.UserId==UserId);
         return View("LikesList");
     }
 
@@ -232,6 +239,7 @@ public class HomeController : Controller
     [HttpPost("Search")]
     public IActionResult SearchResults(string Search)
     {
+        ViewBag.LoggedUser=_context.Users.FirstOrDefault(a=>a.UserId==HttpContext.Session.GetInt32("user"));
         ViewBag.Search=Search;
         ViewBag.SearchResults=_context.Users.Where(a=>a.FirstName==Search);
         return View("SearchResults");
