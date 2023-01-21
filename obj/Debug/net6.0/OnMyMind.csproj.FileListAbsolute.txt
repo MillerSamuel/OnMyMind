@@ -33,3 +33,10 @@ C:\Users\smill\OneDrive\Desktop\OnMyMind\OnMyMind\bin\Debug\net6.0\Microsoft.Ext
 C:\Users\smill\OneDrive\Desktop\OnMyMind\OnMyMind\bin\Debug\net6.0\MySqlConnector.dll
 C:\Users\smill\OneDrive\Desktop\OnMyMind\OnMyMind\bin\Debug\net6.0\Pomelo.EntityFrameworkCore.MySql.dll
 C:\Users\smill\OneDrive\Desktop\OnMyMind\OnMyMind\obj\Debug\net6.0\OnMyMind.csproj.CopyComplete
+C:\Users\smill\OneDrive\Desktop\OnMyMind\OnMyMind\bin\Debug\net6.0\BouncyCastle.Crypto.dll
+C:\Users\smill\OneDrive\Desktop\OnMyMind\OnMyMind\bin\Debug\net6.0\Google.Protobuf.dll
+C:\Users\smill\OneDrive\Desktop\OnMyMind\OnMyMind\bin\Debug\net6.0\MySql.Data.dll
+C:\Users\smill\OneDrive\Desktop\OnMyMind\OnMyMind\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
+C:\Users\smill\OneDrive\Desktop\OnMyMind\OnMyMind\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\smill\OneDrive\Desktop\OnMyMind\OnMyMind\bin\Debug\net6.0\System.Security.Permissions.dll
+C:\Users\smill\OneDrive\Desktop\OnMyMind\OnMyMind\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll

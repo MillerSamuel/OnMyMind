@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnMyMind.Models;
 
@@ -10,9 +11,10 @@ using OnMyMind.Models;
 namespace OnMyMind.Migrations
 {
     [DbContext(typeof(MyContext))]
-    partial class MyContextModelSnapshot : ModelSnapshot
+    [Migration("20220811224758_ThirdMigration")]
+    partial class ThirdMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -148,8 +150,8 @@ namespace OnMyMind.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<byte[]>("ProfilePic")
-                        .HasColumnType("longblob");
+                    b.Property<byte?>("ProfilePic")
+                        .HasColumnType("tinyint unsigned");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime(6)");
