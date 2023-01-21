@@ -15,12 +15,13 @@
 <body>
     <div class="container text-center">
         <h1>Search Results</h1>
-        @foreach (User u in ViewBag.SearchResults)
+        @foreach (var u in ViewBag.NewResults)
         {
+            var U=u["UserId"];
             <div class="post white white2 container text-center" style="width: 25%;">
                 <div class="d-flex align-items-center justify-content-center white">
                     <img class="postimg" src="~/images/ProfilePic.jpg" alt="">
-                    <a class="follow-text" href="Profile/@u.UserId">@u.FirstName @u.LastName</a>
+                    <a class="follow-text" href="Profile/@U">@u["FirstName"] @u["LastName"]</a>
                 </div>
             </div>
             noUsers = false;

@@ -37,7 +37,7 @@ public class User
 
     public string? Location {get;set;}
 
-    public string? ProfilePic {get;set;}
+    public byte[]? ProfilePic {get;set;}
 
 
 //Relationships//

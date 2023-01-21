@@ -21,10 +21,10 @@
 
 </head>
 <partial name="_Header"></partial>
-                @foreach (Connection con in ViewBag.User.Followers)
-                {
-                    { followerCount += 1; }
-                }
+@foreach (Connection con in ViewBag.User.Followers)
+{
+    { followerCount += 1; }
+}
 
 <body>
     <div class="row container" style="margin: 0 auto;">
@@ -33,8 +33,10 @@
             <img class="pfp" src="~/images/ProfilePic.jpg" alt="profile Pic">
             <p class="white profile-text">Bio: @ViewBag.User.Bio</p>
             <p class="white profile-text">Location: @ViewBag.User.Location </p>
-            <div class="white"><a class="follow-text" href="/FollowingList/@ViewBag.User.UserId"> Following: @followingCount</a></div>
-            <div class="white"><a class="follow-text" href="/FollowersList/@ViewBag.User.UserId">Followers: @followerCount</a></div>
+            <div class="white"><a class="follow-text" href="/FollowingList/@ViewBag.User.UserId"> Following:
+                    @followingCount</a></div>
+            <div class="white"><a class="follow-text" href="/FollowersList/@ViewBag.User.UserId">Followers:
+                    @followerCount</a></div>
             <div class="white"><a class="follow-text" href="/LikesList/@ViewBag.User.UserId">View Likes</a></div>
             @if (ViewBag.User.UserId == Context.Session.GetInt32("user"))
             {
@@ -49,8 +51,15 @@
                 {
                     <div class="post white">
                         <h3 class="white">@p.PostText</h3>
-                        <p class="white">Made on: @p.CreatedAt</p>
-                        <p class="white">@p.Likes.Count() Likes</p>
+                        <p class="f-15 white">Made on:@p.CreatedAt.ToShortDateString() @p.CreatedAt.ToShortTimeString()</p>
+                        @if (p.Likes.Count() == 1)
+                        {
+                            <p class="f-15 white">@p.Likes.Count() Like</p>
+                        }
+                        else
+                        {
+                            <p class="f-15 white">@p.Likes.Count() Likes</p>
+                        }
                     </div>
                 }
             }
@@ -64,33 +73,49 @@
                         alreadyFollowing = true;
                     }
                 }
-                @if (alreadyFollowing == false)
+                @if (ViewBag.User.UserId != ViewBag.LoggedUser.UserId)
                 {
-                    <h2 class="m-1"><a href="/Follow/@ViewBag.User.UserId">Follow @ViewBag.User.FirstName</a></h2>
+                    if (alreadyFollowing == false)
+                    {
+                        <h2 class="m-1"><a href="/Follow/@ViewBag.User.UserId">Follow @ViewBag.User.FirstName</a></h2>
+                    }
+                    else
+                    {
+                        <h2 class="m-1"><a href="/Unfollow/@ViewBag.User.UserId">Un-Follow @ViewBag.User.FirstName</a></h2>
+                    }
                 }
                 <h1>@ViewBag.User.FirstName's Posts </h1>
                 @foreach (Post p in ViewBag.User.CreatedPosts)
                 {
                     <div class="post white">
                         <h3 class="white">@p.PostText</h3>
-                        <p class="white">Made on: @p.CreatedAt</p>
-                        <p class="white">@p.Likes.Count() Likes</p>
-                    @foreach (Like l in ViewBag.loggedUser.Likes)
-                    {
-                        if (l.PostId == p.PostId)
+                        <p class="f-15 white">Made on: @p.CreatedAt</p>
+                        @if (p.Likes.Count() == 1)
                         {
-                            { alreadyLiked = true; }
+                            <p class="f-15 white">@p.Likes.Count() Like</p>
                         }
-                    }
-                    @if (!alreadyLiked)
-                    {
-                        <a class="white" href="/Like/@p.PostId">Like</a>
-                    }
-                    else
-                    {
-                        <a class="white" href="/Unlike/@p.PostId">Un-Like</a>
-                    }
-                    @{alreadyLiked = false; }
+                        else
+                        {
+                            <p class="f-15 white">@p.Likes.Count() Likes</p>
+                        }
+                        @foreach (Like l in ViewBag.loggedUser.Likes)
+                        {
+                            if (l.PostId == p.PostId)
+                            {
+                                { alreadyLiked = true; }
+                            }
+                        }
+                        @if (!alreadyLiked)
+                        {
+                            <a class="f-15 white" href="/Like/@p.PostId">Like</a>
+                        }
+                        else
+                        {
+                            <a class="f-15 white" href="/Unlike/@p.PostId">Un-Like</a>
+                        }
+                        @{
+                            alreadyLiked = false;
+                        }
                     </div>
                 }
             }

@@ -20,7 +20,10 @@
 
 .white2 * {
     background-color: white;
+}
 
+.f-15{
+    font-size: 15pt;
 }
 
 /* Login Page */
@@ -110,7 +113,7 @@
     margin: 5px;
 }
 
-.follow-text:hover{
+.hover:hover{
     text-decoration: underline;
     color: unset;
 }
@@ -123,3 +126,6 @@
     box-shadow: 0 0 2px 2px black;
 }
 
+.m-top{
+    margin-top: 50px;
+}

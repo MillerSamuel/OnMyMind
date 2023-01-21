@@ -18,5 +18,4 @@ public class Comment
 
     public DateTime CreatedAt {get;set;}=DateTime.Now;
 
-
 }

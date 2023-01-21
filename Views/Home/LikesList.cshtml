@@ -1,3 +1,6 @@
+@{
+    bool alreadyLiked=false;
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +16,15 @@
     <h1 class="text-center">@ViewBag.User.FirstName's Likes</h1>
     @foreach (Like l in ViewBag.User.Likes)
     {
-        <div class="post white white2 container text-center" style="width: 40%;">
+        @foreach (Like l2 in ViewBag.LoggedUser.Likes)
+        {
+            @if (l2.PostId==l.PostId)
+            {
+                {alreadyLiked=true;}
+            }
+        }
+        @if(l.Post.UserId==ViewBag.LoggedUser.UserId){
+            <div class="post white white2 container text-center" style="width: 40%;">
             <div class="d-flex align-items-center white">
                 <img class="postimg" src="~/images/ProfilePic.jpg" alt="">
                 <h4><a style="text-decoration: unset; color:unset;" href="/Profile/@l.Post.User.UserId">@l.Post.User.FirstName @l.Post.User.LastName</a></h4>
@@ -22,6 +33,30 @@
             <p >@l.Post.CreatedAt.ToShortDateString() @l.Post.CreatedAt.ToShortTimeString()</p>
             <p class="white">@l.Post.Likes.Count() Likes</p>
         </div>
+        }
+        else if(alreadyLiked==true){
+            <div class="post white white2 container text-center" style="width: 40%;">
+            <div class="d-flex align-items-center white">
+                <img class="postimg" src="~/images/ProfilePic.jpg" alt="">
+                <h4><a style="text-decoration: unset; color:unset;" href="/Profile/@l.Post.User.UserId">@l.Post.User.FirstName @l.Post.User.LastName</a></h4>
+            </div>
+            <p >@l.Post.PostText</p>
+            <p >@l.Post.CreatedAt.ToShortDateString() @l.Post.CreatedAt.ToShortTimeString()</p>
+            <p class="white">@l.Post.Likes.Count() Likes  <a class="white" href="/Unlike/@l.PostId">UnLike</a></p>
+        </div>
+        }
+        else{
+        <div class="post white white2 container text-center" style="width: 40%;">
+            <div class="d-flex align-items-center white">
+                <img class="postimg" src="~/images/ProfilePic.jpg" alt="">
+                <h4><a style="text-decoration: unset; color:unset;" href="/Profile/@l.Post.User.UserId">@l.Post.User.FirstName @l.Post.User.LastName</a></h4>
+            </div>
+            <p >@l.Post.PostText</p>
+            <p >@l.Post.CreatedAt.ToShortDateString() @l.Post.CreatedAt.ToShortTimeString()</p>
+            <p class="white">@l.Post.Likes.Count() Likes  <a class="white" href="/like/@l.PostId">Like</a></p>
+        </div>
+        }
+        {alreadyLiked=false;}
     }
 </body>
 </html>
