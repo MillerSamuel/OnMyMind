@@ -197,6 +197,10 @@ public class HomeController : Controller
     [HttpGet("FollowingList/{UserId}")]
     public IActionResult FollowingList(int UserId)
     {
+        if (HttpContext.Session.GetInt32("user") == null)
+        {
+            return RedirectToAction("Index");
+        }
         ViewBag.loggedUser = _context.Users.FirstOrDefault(a => a.UserId == HttpContext.Session.GetInt32("user"));
         ViewBag.User = _context.Users.Include(a => a.Following).ThenInclude(a => a.UserFollowed).FirstOrDefault(a => a.UserId == UserId);
         return View("FollowingList");
@@ -205,6 +209,10 @@ public class HomeController : Controller
     [HttpGet("FollowersList/{UserId}")]
     public IActionResult FollowersList(int UserId)
     {
+        if (HttpContext.Session.GetInt32("user") == null)
+        {
+            return RedirectToAction("Index");
+        }
         ViewBag.loggedUser = _context.Users.FirstOrDefault(a => a.UserId == HttpContext.Session.GetInt32("user"));
         ViewBag.User = _context.Users.Include(a => a.Followers).ThenInclude(a => a.Follower).FirstOrDefault(a => a.UserId == UserId);
         return View("FollowersList");
@@ -247,6 +255,10 @@ public class HomeController : Controller
     [HttpGet("LikesList/{UserId}")]
     public IActionResult LikesList(int UserId)
     {
+        if (HttpContext.Session.GetInt32("user") == null)
+        {
+            return RedirectToAction("Index");
+        }
         ViewBag.LoggedUser = _context.Users.Include(user => user.Likes).ThenInclude(likes => likes.Post).FirstOrDefault(a => a.UserId == HttpContext.Session.GetInt32("user"));
         ViewBag.User = _context.Users.Include(a => a.Likes).ThenInclude(a => a.Post).ThenInclude(a => a.User).Include(user => user.Likes).ThenInclude(likes => likes.Post.Likes).FirstOrDefault(a => a.UserId == UserId);
         return View("LikesList");
@@ -261,7 +273,7 @@ public class HomeController : Controller
         .ThenInclude(followed => followed.CreatedPosts)
         .ThenInclude(post => post.Likes)
         .Include(a => a.Likes).ThenInclude(a => a.Post)
-        .FirstOrDefault(a => a.UserId == HttpContext.Session.GetInt32("user"));        if (ModelState.IsValid)
+        .FirstOrDefault(a => a.UserId == HttpContext.Session.GetInt32("user")); if (ModelState.IsValid)
         {
             _context.Add(comment);
             _context.SaveChanges();
@@ -269,11 +281,15 @@ public class HomeController : Controller
         }
         return View("Dashboard");
     }
-    
+
 
     [HttpGet("ViewPost/{PostId}")]
     public IActionResult ViewPost(int PostId)
     {
+        if (HttpContext.Session.GetInt32("user") == null)
+        {
+            return RedirectToAction("Index");
+        }
         ViewBag.LoggedUser = _context.Users.Include(a => a.Following)
                 .ThenInclude(a => a.UserFollowed)
                 .ThenInclude(followed => followed.CreatedPosts)
@@ -288,6 +304,10 @@ public class HomeController : Controller
     [HttpPost("Search")]
     public IActionResult SearchResults(string Search)
     {
+        if (HttpContext.Session.GetInt32("user") == null)
+        {
+            return RedirectToAction("Index");
+        }
         ViewBag.LoggedUser = _context.Users.Include(user => user.Likes).ThenInclude(like => like.Post).FirstOrDefault(a => a.UserId == HttpContext.Session.GetInt32("user"));
         List<Dictionary<string, object>> SearchedUsers = DbConnector.Query($"SELECT * FROM USERS WHERE FirstName Like '%{Search}%'or LastName Like '%{Search}%'");
         ViewBag.NewResults = SearchedUsers;
