@@ -1,20 +1,20 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: #d1d1d4;
+    background-color: #e7e7e7;
 }
 
 
-.white{
+.white {
     background-color: white;
 }
 
-.green{
+.green {
     color: #42b72a;
 }
 
-.white{
+.white {
     background-color: white;
 }
 
@@ -22,110 +22,152 @@
     background-color: white;
 }
 
-.f-15{
+.f-15 {
     font-size: 15pt;
 }
 
 /* Login Page */
 
-.brand{
-    font-size: 65px;
-    margin-bottom: 30px;
+.brand {
+    font-size: 60px;
+    margin-bottom: 10px;
 }
 
-.login-box{
-    width: 28%;
-    margin:auto;
+
+.divider {
+    height: 3px;
+    width: 100%;
+    background: black;
+    background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 350, from(#000), to(#e7e7e7));
+    margin: 0 0 30px 0;
+}
+
+
+.login-box {
+    width: 350pt;
+    margin: auto;
     box-shadow: 0 0 2px 2px black;
 }
 
-.login-box *{
+.login-box * {
     background-color: white;
 }
 
-.btn{
-    background-color: lightskyblue;
-    padding-top: 5px;
-    margin-top: -5px;
-    
+.btn {
+    color: white;
+    background-color: #1877f2;
+    width: 8rem;
+}
+
+.register {
+    color: white;
+    background-color: #42b72a;
+    margin: 0 0 25px 0;
 }
 
 
-/* Dashboard */
-
-
-.head{
-    background-color:#ffff
-}
-
-.searchbox{
-    width: 15%;
-    height: 35px;
-    margin-top: 5px;
-}
-
-.srchbtn:hover{
-    transform: scale(1.05);
-    transition:ease-in 75ms;
-}
-.feed{
-    width: 50%;
+.divider2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     text-align: center;
-    margin: 0 auto;
 }
 
-.post{
-    border: 1px solid rgba(0, 0, 0, 0.842);
-    box-shadow: 0 0 2px 1px black;
-    margin-bottom: 50px;
+.divider2:before,
+.divider2:after {
+    background-color: #ddd;
+    content: '\a0';
+    flex-grow: 1;
+    height: 1px;
+    margin-top: 0.75rem;
+
 }
 
-.name{
-    text-decoration: unset;
-    color: unset;
+.divider2:before {
+    margin-right: 10px;
+
 }
 
-.postimg{
-    width: 50px;
-    border-radius: 50%;
-    margin: 10px;
+.divider2:after {
+    margin-left: 10px;
 }
 
-
-/* Profiile Page */
-
-.pfp{
-    border-radius: 50%;
-    height: 170px;
-    margin-left: 30px;
-}
-
-.profile-text{
-    font-size: 14pt;
-    margin: 5px;
-}
-
-.follow-text{
-    text-decoration: unset;
-    color: unset;
-    font-size: 13pt;
-    background-color: white;
-    margin: 5px;
-}
-
-.hover:hover{
-    text-decoration: underline;
-    color: unset;
-}
+    /* Dashboard */
 
 
-/* new post */
-.post-box{
-    width: 50%;
-    margin:10px auto;
-    box-shadow: 0 0 2px 2px black;
-}
+    .head {
+        background-color: #ffff;
+        text-decoration: unset;
+    }
 
-.m-top{
-    margin-top: 50px;
-}
+    .searchbox {
+        width: 15%;
+        height: 40px;
+        margin: 10px;
+    }
+
+    .srchbtn:hover {
+        transform: scale(1.05);
+        transition: ease-in 75ms;
+    }
+
+    .feed {
+        width: 50%;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .post {
+        border: 1px solid rgba(0, 0, 0, 0.842);
+        box-shadow: 0 0 2px 1px black;
+        margin-bottom: 50px;
+    }
+
+    .name {
+        text-decoration: unset;
+        color: unset;
+    }
+
+    .postimg {
+        width: 50px;
+        border-radius: 50%;
+        margin: 10px;
+    }
+
+
+    /* Profiile Page */
+
+    .pfp {
+        border-radius: 50%;
+        height: 170px;
+        margin-left: 30px;
+    }
+
+    .profile-text {
+        font-size: 14pt;
+        margin: 5px;
+    }
+
+    .follow-text {
+        text-decoration: unset;
+        color: unset;
+        font-size: 13pt;
+        background-color: white;
+        margin: 5px;
+    }
+
+    .hover:hover {
+        color: unset;
+    }
+
+
+    /* new post */
+    .post-box {
+        width: 50%;
+        margin: 10px auto;
+        box-shadow: 0 0 2px 2px black;
+    }
+
+    .m-top {
+        margin-top: 50px;
+    }

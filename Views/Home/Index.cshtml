@@ -1,13 +1,18 @@
 ﻿@{
     ViewData["Title"] = "Login";
 }
+
 @model LogUser
 <link rel="stylesheet" href="~/css/style.css">
 
-<div class="text-center">
+
+<div class="text-center m-5">
     <div>
         <h1 class="brand">OnMyMind</h1>
     </div>
+
+    <div class="divider"></div>
+
     <div class="login-box">
         <h1 style="margin: 0px;">Login</h1>
         <div class="container">
@@ -22,9 +27,10 @@
                     <input class="form-control" asp-for="LogPassword">
                     <span class="text-danger" asp-validation-for="LogPassword"></span>
                 </div>
-                <input class="m-2 btn" type="submit" value="Login">
+                <input class="m-2 btn" type="submit" value="Log in">
             </form>
+            <p class="divider2">or</p>
+            <a href="Register"><button class="btn register">Register Now</button></a>
         </div>
-        <p style="margin: 0;">Dont Have an Account? Register <a href="Register">Here</a></p>
     </div>
 </div>

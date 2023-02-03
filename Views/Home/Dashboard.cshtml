@@ -60,7 +60,7 @@
                                     <input asp-for="CommentText">
                                     <input asp-for="UserId" hidden value="@ViewBag.LoggedUser.UserId">
                                     <input asp-for="PostId" hidden value="@p.PostId">
-                                    <input class=" p-1" type="submit" value="Send Comment">
+                                    <input class=" p-1" type="submit" value="Comment">
                                 </form>
                                 <a class="white" href="ViewPost/@p.PostId"><button class="white m-1 p-1">View Comments</button></a>
                             </div>
@@ -74,7 +74,7 @@
                                             @c.UserFollowed.FirstName @c.UserFollowed.LastName</a> </p>
                                 </div>
                                 <p class="f-15 white">@p.PostText</p>
-                                <p class="f-15 white">@p.CreatedAt.ToShortDateString() @p.CreatedAt.ToShortTimeString() <a
+                                <p class="f-15 white">@p.CreatedAt.ToShortDateString() @p.CreatedAt.ToShortTimeString()<a
                             class="white" href="/Like/@p.PostId">Like</a></p>
                                 @if (p.Likes.Count() == 1)
                                 {
@@ -88,7 +88,7 @@
                                     <input asp-for="CommentText">
                                     <input asp-for="UserId" hidden value="@ViewBag.LoggedUser.UserId">
                                     <input asp-for="PostId" hidden value="@p.PostId">
-                                    <input class="p-1" type="submit" value="Send Comment">
+                                    <input class="p-1" type="submit" value="Comment">
                                 </form>
                                 <a class="white" href="ViewPost/@p.PostId"><button class="white m-1 p-1">View Comments</button></a>
                             </div>
@@ -104,6 +104,7 @@
                     <h1>No Posts to Show</h1>
                 }
             </div>
+
             <div>
                 <h2>Follow Suggestions</h2>
                 @foreach (User u in ViewBag.allUsers)
