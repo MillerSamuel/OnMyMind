@@ -8,6 +8,8 @@ using DbConnection;
 namespace OnMyMind.Controllers;
 
 
+
+
 public class HomeController : Controller
 {
     private MyContext _context;
@@ -92,6 +94,10 @@ public class HomeController : Controller
         .ThenInclude(followed => followed.CreatedPosts)
         .ThenInclude(post => post.Likes)
         .Include(a => a.Likes).ThenInclude(a => a.Post)
+        .Include(a => a.Following)
+        .ThenInclude(a => a.UserFollowed)
+        .ThenInclude(followed => followed.CreatedPosts)
+        .ThenInclude(post => post.Comments)
         .FirstOrDefault(a => a.UserId == HttpContext.Session.GetInt32("user"));
         // ViewBag.AllPosts=_context.Posts.Include(post=>Likes).ToList();
         return View();
@@ -110,13 +116,21 @@ public class HomeController : Controller
     // }
 
     [HttpGet("Profile/{userId}")]
-    public IActionResult Profile2(int userId)
+    public IActionResult Profile(int userId)
     {
         if (HttpContext.Session.GetInt32("user") == null)
         {
             return RedirectToAction("Index");
         }
-        ViewBag.User = _context.Users.Include(a => a.CreatedPosts).ThenInclude(post => post.Likes).Include(a => a.Followers).ThenInclude(a => a.Follower).Include(a => a.Following).ThenInclude(a => a.UserFollowed).FirstOrDefault(a => a.UserId == userId);
+        ViewBag.User = _context.Users.Include(a => a.CreatedPosts)
+        .ThenInclude(post => post.Likes)
+        .Include(a=>a.CreatedPosts)
+        .ThenInclude(a=>a.Comments)
+        .Include(a => a.Followers)
+        .ThenInclude(a => a.Follower)
+        .Include(a => a.Following)
+        .ThenInclude(a => a.UserFollowed)
+        .FirstOrDefault(a => a.UserId == userId);
         ViewBag.LoggedUser = _context.Users.Include(a => a.Likes).ThenInclude(a => a.Post).Include(a => a.Following).ThenInclude(a => a.UserFollowed).FirstOrDefault(a => a.UserId == HttpContext.Session.GetInt32("user"));
         return View("Profile");
     }
@@ -152,7 +166,6 @@ public class HomeController : Controller
         {
             return RedirectToAction("Index");
         }
-        User LoggedUser = _context.Users.FirstOrDefault(a => a.UserId == HttpContext.Session.GetInt32("user"));
         ViewBag.LoggedUser = _context.Users.FirstOrDefault(a => a.UserId == HttpContext.Session.GetInt32("user"));
         return View();
     }
@@ -170,6 +183,14 @@ public class HomeController : Controller
         return View("NewPost");
     }
 
+    [HttpGet("/RemovePost/{PostId}")]
+    public IActionResult RemovePost(int PostId)
+    {
+        Post post=_context.Posts.FirstOrDefault(a=>a.PostId==PostId);
+        _context.Posts.Remove(post);
+        _context.SaveChanges();
+        return RedirectToAction("Dashboard");
+    }
 
     [HttpGet("Follow/{UserId}")]
     public IActionResult AddFollow(int UserId)
@@ -260,7 +281,15 @@ public class HomeController : Controller
             return RedirectToAction("Index");
         }
         ViewBag.LoggedUser = _context.Users.Include(user => user.Likes).ThenInclude(likes => likes.Post).FirstOrDefault(a => a.UserId == HttpContext.Session.GetInt32("user"));
-        ViewBag.User = _context.Users.Include(a => a.Likes).ThenInclude(a => a.Post).ThenInclude(a => a.User).Include(user => user.Likes).ThenInclude(likes => likes.Post.Likes).FirstOrDefault(a => a.UserId == UserId);
+        ViewBag.User = _context.Users.Include(a => a.Likes)
+        .ThenInclude(a => a.Post)
+        .ThenInclude(a => a.User)
+        .Include(user => user.Likes)
+        .ThenInclude(likes => likes.Post.Likes)
+        .Include(a=>a.Likes)
+        .ThenInclude(a=>a.Post)
+        .ThenInclude(a=>a.Comments)
+        .FirstOrDefault(a => a.UserId == UserId);
         return View("LikesList");
     }
 
@@ -296,48 +325,59 @@ public class HomeController : Controller
                 .ThenInclude(post => post.Likes)
                 .Include(a => a.Likes).ThenInclude(a => a.Post)
                 .FirstOrDefault(a => a.UserId == HttpContext.Session.GetInt32("user"));
-        ViewBag.Post = _context.Posts.Include(post => post.Comments).ThenInclude(comment => comment.UserCommenting).FirstOrDefault(a => a.PostId == PostId);
+        ViewBag.Post = _context.Posts.Include(post => post.Comments).ThenInclude(comment => comment.UserCommenting).Include(a=>a.User).FirstOrDefault(a => a.PostId == PostId);
         return View();
     }
 
 
     [HttpPost("Search")]
-    public IActionResult SearchResults(string Search)
+    public IActionResult Search(string Search)
     {
         if (HttpContext.Session.GetInt32("user") == null)
         {
             return RedirectToAction("Index");
         }
-        ViewBag.LoggedUser = _context.Users.Include(user => user.Likes).ThenInclude(like => like.Post).FirstOrDefault(a => a.UserId == HttpContext.Session.GetInt32("user"));
-        List<Dictionary<string, object>> SearchedUsers = DbConnector.Query($"SELECT * FROM USERS WHERE FirstName Like '%{Search}%'or LastName Like '%{Search}%'");
-        ViewBag.NewResults = SearchedUsers;
-        return View("SearchResults");
+        HttpContext.Session.SetString("search",Search);
+        return RedirectToAction("SearchResults");
     }
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public IActionResult Privacy()
+    [HttpGet("SearchResults")]
+    public IActionResult SearchResults()
     {
-        return View();
+        if (HttpContext.Session.GetInt32("user") == null)
+        {
+            return RedirectToAction("Index");
+        }
+        ViewBag.Search=HttpContext.Session.GetString("search");
+        List<Dictionary<string, object>> SearchedUsers = DbConnector.Query($"SELECT * FROM USERS WHERE FirstName Like '%{ViewBag.Search}%'or LastName Like '%{ViewBag.Search}%' or CONCAT_WS(' ',FirstName,LastName) LIKE '%{ViewBag.Search}%'");
+        ViewBag.NewResults=SearchedUsers;
+        ViewBag.LoggedUser=_context.Users.FirstOrDefault(a=>a.UserId==HttpContext.Session.GetInt32("user"));
+        return View("SearchResults");
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()

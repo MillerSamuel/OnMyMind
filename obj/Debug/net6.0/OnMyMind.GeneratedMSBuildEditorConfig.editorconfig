@@ -8,81 +8,77 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = OnMyMind
 build_property.RootNamespace = OnMyMind
-build_property.ProjectDir = c:\Users\smill\OneDrive\Desktop\OnMyMind\OnMyMind\
+build_property.ProjectDir = C:\Users\smill\OneDrive\Desktop\OnMyMind\OnMyMind\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = c:\Users\smill\OneDrive\Desktop\OnMyMind\OnMyMind
+build_property.MSBuildProjectDirectory = C:\Users\smill\OneDrive\Desktop\OnMyMind\OnMyMind
 build_property._RazorSourceGeneratorDebug = 
 
-[c:/Users/smill/OneDrive/Desktop/OnMyMind/OnMyMind/Views/Home/Dashboard.cshtml]
+[C:/Users/smill/OneDrive/Desktop/OnMyMind/OnMyMind/Views/Home/Dashboard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxEYXNoYm9hcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/smill/OneDrive/Desktop/OnMyMind/OnMyMind/Views/Home/EditProfile.cshtml]
+[C:/Users/smill/OneDrive/Desktop/OnMyMind/OnMyMind/Views/Home/EditProfile.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxFZGl0UHJvZmlsZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/smill/OneDrive/Desktop/OnMyMind/OnMyMind/Views/Home/FollowersList.cshtml]
+[C:/Users/smill/OneDrive/Desktop/OnMyMind/OnMyMind/Views/Home/FollowersList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxGb2xsb3dlcnNMaXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/smill/OneDrive/Desktop/OnMyMind/OnMyMind/Views/Home/FollowingList.cshtml]
+[C:/Users/smill/OneDrive/Desktop/OnMyMind/OnMyMind/Views/Home/FollowingList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxGb2xsb3dpbmdMaXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/smill/OneDrive/Desktop/OnMyMind/OnMyMind/Views/Home/Index.cshtml]
+[C:/Users/smill/OneDrive/Desktop/OnMyMind/OnMyMind/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/smill/OneDrive/Desktop/OnMyMind/OnMyMind/Views/Home/LikesList.cshtml]
+[C:/Users/smill/OneDrive/Desktop/OnMyMind/OnMyMind/Views/Home/LikesList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxMaWtlc0xpc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/smill/OneDrive/Desktop/OnMyMind/OnMyMind/Views/Home/NewPost.cshtml]
+[C:/Users/smill/OneDrive/Desktop/OnMyMind/OnMyMind/Views/Home/NewPost.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxOZXdQb3N0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/smill/OneDrive/Desktop/OnMyMind/OnMyMind/Views/Home/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[c:/Users/smill/OneDrive/Desktop/OnMyMind/OnMyMind/Views/Home/Profile.cshtml]
+[C:/Users/smill/OneDrive/Desktop/OnMyMind/OnMyMind/Views/Home/Profile.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcm9maWxlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/smill/OneDrive/Desktop/OnMyMind/OnMyMind/Views/Home/Register.cshtml]
+[C:/Users/smill/OneDrive/Desktop/OnMyMind/OnMyMind/Views/Home/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/smill/OneDrive/Desktop/OnMyMind/OnMyMind/Views/Home/SearchResults.cshtml]
+[C:/Users/smill/OneDrive/Desktop/OnMyMind/OnMyMind/Views/Home/SearchResults.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTZWFyY2hSZXN1bHRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/smill/OneDrive/Desktop/OnMyMind/OnMyMind/Views/Home/ViewPost.cshtml]
+[C:/Users/smill/OneDrive/Desktop/OnMyMind/OnMyMind/Views/Home/ViewPost.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxWaWV3UG9zdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/smill/OneDrive/Desktop/OnMyMind/OnMyMind/Views/Home/_Header.cshtml]
+[C:/Users/smill/OneDrive/Desktop/OnMyMind/OnMyMind/Views/Home/_Header.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxfSGVhZGVyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/smill/OneDrive/Desktop/OnMyMind/OnMyMind/Views/Shared/Error.cshtml]
+[C:/Users/smill/OneDrive/Desktop/OnMyMind/OnMyMind/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/smill/OneDrive/Desktop/OnMyMind/OnMyMind/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/smill/OneDrive/Desktop/OnMyMind/OnMyMind/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/smill/OneDrive/Desktop/OnMyMind/OnMyMind/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/smill/OneDrive/Desktop/OnMyMind/OnMyMind/Views/_ViewImports.cshtml]
+[C:/Users/smill/OneDrive/Desktop/OnMyMind/OnMyMind/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/smill/OneDrive/Desktop/OnMyMind/OnMyMind/Views/_ViewStart.cshtml]
+[C:/Users/smill/OneDrive/Desktop/OnMyMind/OnMyMind/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
-
-[c:/Users/smill/OneDrive/Desktop/OnMyMind/OnMyMind/Views/Shared/_Layout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = b-4tps99xwxg

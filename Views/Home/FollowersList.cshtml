@@ -1,3 +1,8 @@
+@{
+    ViewData["Title"] = "Follower List";
+}
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,16 +10,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="~/css/follow.css">
 </head>
 <partial name="_Header.cshtml"></partial>
-<body>
-    <div class="container">
-        <h1>@ViewBag.User.FirstName's Followers</h1>
+
+<body class="back">
+    <div class="container" style="margin-top: 8vh;">
+        <h1 style="text-align: center;">@ViewBag.User.FirstName is Followed By</h1>
         @foreach (Connection c in ViewBag.User.Followers)
         {
-            <div class="d-flex align-items-center post white white2" style="width: 350px;">
-                <img class="postimg" src="/images/ProfilePic.jpg" alt="">
-                <p><a class="follow-text" href="/Profile/@c.Follower.UserId">@c.Follower.FirstName @c.Follower.LastName</a> </p>
+            <div class="post " style="width: 25%;">
+                <div class="d-flex align-items-center">
+                    <img class="postimg" src="~/images/ProfilePic.jpg" alt="Profile Picure">
+                    <a class="unset" href="/Profile/@c.FollowerId">@c.Follower.FirstName @c.Follower.LastName </a>
+                </div>
             </div>
         }
     </div>

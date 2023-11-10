@@ -1,5 +1,7 @@
 @{
     bool noUsers = true;
+    ViewData["Title"] = "Search Results";
+
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -9,26 +11,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="~/css/follow.css">
 </head>
 <partial name="_Header"></partial>
 
-<body>
-    <div class="container text-center">
-        <h1>Search Results</h1>
-        @foreach (var u in ViewBag.NewResults)
+<body class="back">
+    <div style="margin-top: 7vh;" class="postContainer">
+        <h1 class="resultsText">Search Results</h1>
+        @foreach (var user in ViewBag.NewResults)
         {
-            var U=u["UserId"];
-            <div class="post white white2 container text-center" style="width: 25%;">
-                <div class="d-flex align-items-center justify-content-center white">
+            var uid=user["UserId"];
+            <div class="post">
+                <div class="d-flex align-items-center ">
                     <img class="postimg" src="~/images/ProfilePic.jpg" alt="">
-                    <a class="follow-text" href="Profile/@U">@u["FirstName"] @u["LastName"]</a>
+                    <a class="unset" href="Profile/@uid">@user["FirstName"] @user["LastName"]</a>
                 </div>
             </div>
             noUsers = false;
         }
         @if (noUsers == true)
         {
-            <p>Sorry, No results for @ViewBag.Search</p>
+            <h3 style="text-align: center;">Sorry, No results for @ViewBag.Search</h3>
         }
     </div>
 </body>

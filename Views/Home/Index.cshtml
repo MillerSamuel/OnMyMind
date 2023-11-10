@@ -3,17 +3,14 @@
 }
 
 @model LogUser
-<link rel="stylesheet" href="~/css/style.css">
+<link rel="stylesheet" href="~/css/index.css">
 
-
-<div class="text-center m-5">
+<body class="text-center back">
+<div >
     <div>
         <h1 class="brand">OnMyMind</h1>
     </div>
-
-    <div class="divider"></div>
-
-    <div class="login-box">
+    <div class="loginBox">
         <h1 style="margin: 0px;">Login</h1>
         <div class="container">
             <form style="padding:10px;" action="/login" method="post">
@@ -30,7 +27,8 @@
                 <input class="m-2 btn" type="submit" value="Log in">
             </form>
             <p class="divider2">or</p>
-            <a href="Register"><button class="btn register">Register Now</button></a>
+            <a href="Register"><button class="m-2 btn register">Register Now</button></a>
         </div>
     </div>
 </div>
+</body>

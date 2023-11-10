@@ -9,19 +9,19 @@ public class User
     [Key]
     public int UserId{get;set;}
 
-    [Required]
+    [Required(ErrorMessage ="Invalid First Name")]
     [MinLength(2)]
     public string FirstName {get;set;}
 
-    [Required]
+    [Required(ErrorMessage ="Invalid Last Name")]
     [MinLength(2)]
     public string LastName {get;set;}
 
-    [Required]
+    [Required(ErrorMessage ="Invalid Email")]
     [EmailAddress]
     public string Email {get;set;}
 
-    [Required]
+    [Required(ErrorMessage ="Invalid Password: Must be 8 characters")]
     [DataType(DataType.Password)]
     [MinLength(8)]
     public string Password {get;set;}

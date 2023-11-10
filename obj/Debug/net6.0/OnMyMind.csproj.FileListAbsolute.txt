@@ -16,9 +16,7 @@ C:\Users\smill\OneDrive\Desktop\OnMyMind\OnMyMind\obj\Debug\net6.0\OnMyMind.Razo
 C:\Users\smill\OneDrive\Desktop\OnMyMind\OnMyMind\obj\Debug\net6.0\OnMyMind.RazorAssemblyInfo.cs
 C:\Users\smill\OneDrive\Desktop\OnMyMind\OnMyMind\obj\Debug\net6.0\staticwebassets.build.json
 C:\Users\smill\OneDrive\Desktop\OnMyMind\OnMyMind\obj\Debug\net6.0\staticwebassets.development.json
-C:\Users\smill\OneDrive\Desktop\OnMyMind\OnMyMind\obj\Debug\net6.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\smill\OneDrive\Desktop\OnMyMind\OnMyMind\obj\Debug\net6.0\scopedcss\bundle\OnMyMind.styles.css
-C:\Users\smill\OneDrive\Desktop\OnMyMind\OnMyMind\obj\Debug\net6.0\scopedcss\projectbundle\OnMyMind.bundle.scp.css
 C:\Users\smill\OneDrive\Desktop\OnMyMind\OnMyMind\obj\Debug\net6.0\OnMyMind.dll
 C:\Users\smill\OneDrive\Desktop\OnMyMind\OnMyMind\obj\Debug\net6.0\refint\OnMyMind.dll
 C:\Users\smill\OneDrive\Desktop\OnMyMind\OnMyMind\obj\Debug\net6.0\OnMyMind.pdb

@@ -1,7 +1,19 @@
 @{
-    ViewData["Title"] = "Post";
-    bool alreadyFollowing = false;
-    bool alreadyLiked = false;
+    ViewData["Title"] = "View Post";
+    Post post = ViewBag.Post;
+    bool isLiked(Post post)
+    {
+        @foreach (Like like in ViewBag.loggedUser.Likes)
+        {
+            if (like.PostId == post.PostId)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 }
 
 <!DOCTYPE html>
@@ -12,101 +24,60 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="~/css/viewPost.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+
 </head>
 <partial name="_Header"></partial>
 @model Comment
 
-<body>
-    <div class="container ">
-        <div class="feed">
-            @foreach (Connection c in ViewBag.LoggedUser.Following)
-            {
-                @foreach (Post p in c.UserFollowed.CreatedPosts)
+<body class="back">
+    <div class="postContainer">
+        <div class="post">
+            <div class="d-flex justify-content-between ">
+                <div class="d-flex align-items-center">
+                    <img class="postimg" src="~/images/ProfilePic.jpg" alt="Profile Picture">
+                    <p class="name">@ViewBag.Post.User.FirstName @ViewBag.Post.User.LastName</p>
+                </div>
+                <p class="date"> @post.CreatedAt.ToShortDateString() @post.CreatedAt.ToShortTimeString()</p>
+            </div>
+            <p class="postText ">@post.PostText</p>
+            <div class="postBottom">
+                @if (isLiked(post) == true)
                 {
-                    if (p.PostId == ViewBag.Post.PostId)
-                    {
-                        @foreach (Like l in ViewBag.LoggedUser.Likes)
-                        {
-                            if (l.PostId == p.PostId)
-                            {
-                                alreadyLiked = true;
-                            }
-                        }
-                        if (alreadyLiked)
-                        {
-                            <div class="post m-top white">
-                                <div class="d-flex  align-items-center white">
-                                    <img class="postimg" src="~/images/ProfilePic.jpg" alt="">
-                                    <p class="white"><a class="name f-15 white" href="/Profile/@c.UserFollowed.UserId">
-                                            @c.UserFollowed.FirstName @c.UserFollowed.LastName</a></p>
-                                </div>
-                                <p class="white f-15">@p.PostText </p>
-                                <p class="white f-15">@p.CreatedAt.ToShortDateString() @p.CreatedAt.ToShortTimeString() <a class="white"
-                        href="/Unlike/@p.PostId">Un-Like</a></p>
-                                @if (p.Likes.Count() == 1)
-                                {
-                                    <p class="f-15 white">@p.Likes.Count() like</p>
-                                }
-                                else
-                                {
-                                    <p class="f-15 white">@p.Likes.Count() likes</p>
-                                }
-                                <p style="text-decoration: underline;" class="white">Comments</p>
-                                @foreach (Comment comment in ViewBag.Post.Comments)
-                                {
-                                    <p class="white">@comment.UserCommenting.FirstName @comment.UserCommenting.LastName: @comment.CommentText</p>
-                                }
-                                <form class="white white2" action="/postComment" method="post">
-                                    <input asp-for="CommentText">
-                                    <span asp-validation-for="CommentText"></span>
-                                    <input asp-for="UserId" hidden value="@ViewBag.LoggedUser.UserId">
-                                    <input asp-for="PostId" hidden value="@p.PostId">
-                                    <input style="margin-bottom: 15px;" type="submit" value="Send Comment">
-                                </form>
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="post m-top white">
-                                <div class="d-flex align-items-center white">
-                                    <img class="postimg" src="~/images/ProfilePic.jpg" alt="">
-                                    <p class="white"><a class="f-15 name white" href="/Profile/@c.UserFollowed.UserId">
-                                            @c.UserFollowed.FirstName @c.UserFollowed.LastName</a> </p>
-                                </div>
-                                <p class="f-15 white">@p.PostText</p>
-                                <p class="f-15 white">@p.CreatedAt.ToShortDateString() @p.CreatedAt.ToShortTimeString() <a class="white"
-                        href="/Like/@p.PostId">Like</a></p>
-                                @if (p.Likes.Count() == 1)
-                                {
-                                    <p class="f-15 white">@p.Likes.Count() like</p>
-                                }
-                                else
-                                {
-                                    <p class="f-15 white">@p.Likes.Count() likes</p>
-                                }
-                                <p style="text-decoration: underline;" class="white">Comments</p>
-                                @foreach (Comment comment in ViewBag.Post.Comments)
-                                {
-                                    <p class="white">@comment.UserCommenting.FirstName @comment.UserCommenting.LastName:
-                                        @comment.CommentText</p>
-                                }
-                                <form class="white white2" action="/postComment" method="post">
-                                    <input asp-for="CommentText">
-                                    <input asp-for="UserId" hidden value="@ViewBag.LoggedUser.UserId">
-                                    <input asp-for="PostId" hidden value="@p.PostId">
-                                    <input style="margin-bottom: 15px;" type="submit" value="Send Comment">
-                                </form>
-                            </div>
-                        }
-                        {
-                            alreadyLiked = false;
-                        }
-                    }
+                    <a href="/Unlike/@post.PostId"><i class="bi bi-heart-fill"></i></a>
                 }
+                else
+                {
+                    <a href="/Like/@post.PostId"><i class="bi bi-heart"></i></a>
+                }
+                @if (post.Likes.Count() == 1)
+                {
+                    <p class="inline">@post.Likes.Count() like</p>
+                }
+                else
+                {
+                    <p class="inline">@post.Likes.Count() likes</p>
+                }
+                <form id="commentForm" class=" 2" action="/postComment" method="post">
+                    <input placeholder="Add a Comment" asp-for="CommentText">
+                    <input asp-for="UserId" hidden value="@ViewBag.LoggedUser.UserId">
+                    <input asp-for="PostId" hidden value="@post.PostId">
+                    <i onclick="submitHandler(`commentForm`)" class="bi bi-send"
+                        style="color: white; cursor:pointer;"></i>
+                </form>
+            </div>
+        </div>
+        <div class="commentsBox">
+            <h3>Comments:</h3>
+            @foreach (Comment comment in post?.Comments)
+            {
+                <p>@comment.UserCommenting.FirstName @comment.UserCommenting.LastName: @comment.CommentText</p>
             }
         </div>
     </div>
-    </div>
+    
 </body>
 
 </html>

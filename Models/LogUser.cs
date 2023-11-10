@@ -4,11 +4,11 @@ namespace OnMyMind.Models;
 
 public class LogUser 
 { 
-    [Required]
+    [Required(ErrorMessage ="Invalid Email")]
     [EmailAddress] 
     public string LogEmail{get;set;}
 
-    [Required]
+    [Required(ErrorMessage ="Invalid Password")]
     [DataType(DataType.Password)]
     public string LogPassword{get;set;}
 } 

@@ -3,26 +3,31 @@
 }
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="~/css/profile.css">
+
 </head>
 @model Post
 <partial name="_Header"></partial>
-<body>
-    <div class="container" >
-        <div class="post-box">
-            <form action="/CreatePost" method="post" class="white2 white">
-                <h2 class="text-center" style="margin: 0px;">Whats on Your Mind? </h2>
-                <div class="form-group p-3 d-flex justify-content-center">
-                    <textarea  cols="50" rows="4" asp-for="PostText"></textarea>
+
+<body class="back">
+    <div>
+        <div style="margin-top: 8vh; width: 40vw;" class="post">
+            <form id="postId" action="/CreatePost" method="post">
+                <h2 class="text-center">Whats on Your Mind? </h2>
+                <div class="form-group d-flex justify-content-center">
+                    <textarea id="PostText" class="textArea" cols="50" rows="6" asp-for="PostText"></textarea>
                 </div>
-                <div class="d-flex justify-content-center p-2"><input  type="submit" value="Create Post" class="btn"></div>
+                <p onclick="submitHandler('postId','PostText')" class="btn">Submit</p>
                 <input asp-for="UserId" hidden value="@ViewBag.LoggedUser.UserId">
             </form>
         </div>
     </div>
 </body>
+
 </html>
